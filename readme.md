@@ -1,25 +1,38 @@
-# 💻 Solutions for Cognizant Digital Nurture 4.0 – Java FSE Track
+# Solutions for Cognizant Digital Nurture 4.0 – Java FSE Track
 
 This repository contains my hands-on solutions for the **Digital Nurture 4.0 – Java Full Stack Engineer (FSE)** training program, organized **module-wise**.
 
 ---
 
-## 📚 Currently Working On
+## Currently Working On
 
-**Module I – Design Patterns & Principles**
-
-- Covering: SOLID principles, GoF patterns (Creational, Structural, Behavioral)
+**Module 2 – Data Structures and Algorithms**
 
 ---
 
-## 🗂️ Module Structure Present As Of Now
+## Completed As Of Yet:
+
+**Module 1 – Design Patterns & Principles**
+
+---
+
+## Module Structure Present As Of Now:
 
 ```bash
 DigitalNurture4.0-JavaFSE/
 │
-├── Module I - Design Patterns & Principles
-│   └── SingletonPatternExample/
+├── Module I (Design Pattern & Principles)
+│   └── AdapterPatternExample/
+│   └── BuilderPatternExample/
+│   └── CommandPatternExample/
+│   └── DecoratorPatternExample/
+│   └── DependencyInjectionPatternExample/
 │   └── FactoryMethodPatternExample/
+│   └── MVCPatternExample/
+│   └── ObserverPatternExample/
+│   └── ProxyPatternExample/
+│   └── SingletonPatternExample/
+│   └── StrategyPatternExample/
 │
 
 ...
