@@ -12,7 +12,7 @@ This repository contains my hands-on solutions for the **Digital Nurture 4.0 –
 
 ## Completed As Of Yet:
 
-**Module 1 – Design Patterns & Principles**
+- **Module 1 – Design Patterns & Principles**
 
 ---
 
@@ -37,3 +37,9 @@ DigitalNurture4.0-JavaFSE/
 
 ...
 ```
+
+---
+
+## Made by
+
+#### Hridhwesh Maity (Superset ID: 6383472)
