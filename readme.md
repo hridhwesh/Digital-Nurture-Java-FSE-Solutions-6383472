@@ -22,18 +22,12 @@ This repository contains my hands-on solutions for the **Digital Nurture 4.0 –
 DigitalNurture4.0-JavaFSE/
 │
 ├── Module I (Design Pattern & Principles)
-│   └── AdapterPatternExample/
-│   └── BuilderPatternExample/
-│   └── CommandPatternExample/
-│   └── DecoratorPatternExample/
-│   └── DependencyInjectionPatternExample/
-│   └── FactoryMethodPatternExample/
-│   └── MVCPatternExample/
-│   └── ObserverPatternExample/
-│   └── ProxyPatternExample/
-│   └── SingletonPatternExample/
-│   └── StrategyPatternExample/
 │
+├── Module II (Data Structures & Algorithms)
+|       |
+|       |_ Ecommerce Platform Search
+|
+
 
 ...
 ```
