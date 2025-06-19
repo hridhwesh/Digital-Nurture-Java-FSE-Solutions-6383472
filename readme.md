@@ -24,10 +24,10 @@ DigitalNurture4.0-JavaFSE/
 ├── Module I (Design Pattern & Principles)
 │
 ├── Module II (Data Structures & Algorithms)
-|       |
-|       |_ Ecommerce Platform Search
-|
-
+│       │
+│       │─ Ecommerce Platform Search
+│       │─ Sorting Customer Orders
+│
 
 ...
 ```

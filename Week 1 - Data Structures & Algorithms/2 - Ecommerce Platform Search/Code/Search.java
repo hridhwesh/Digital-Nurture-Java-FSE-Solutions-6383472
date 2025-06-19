@@ -31,5 +31,6 @@ public class Search{
         else{
             System.out.println("Wrong choice");
         }
+        sc.close();
     }
 }
