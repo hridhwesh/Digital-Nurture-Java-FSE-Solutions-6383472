@@ -27,6 +27,7 @@ DigitalNurture4.0-JavaFSE/
 │       │
 │       │─ Ecommerce Platform Search
 │       │─ Sorting Customer Orders
+│       │─ Financial Forecasting
 │
 
 ...
