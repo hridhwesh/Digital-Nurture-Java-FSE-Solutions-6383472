@@ -15,22 +15,6 @@ This repository contains my hands-on solutions for the **Digital Nurture 4.0 –
 
 ---
 
-## Module Structure Present As Of Now:
-
-```bash
-DigitalNurture4.0-JavaFSE/
-│
-├── Module I (Design Pattern & Principles)
-│
-├── Module II (Data Structures & Algorithms)
-│
-│
-
-...
-```
-
----
-
 ## Made by
 
 #### Hridhwesh Maity (Superset ID: 6383472)
