@@ -1,0 +1,145 @@
+-- Scenario 1
+-- Safe Transfer Procedure with Custom Error Handling
+CREATE OR REPLACE PROCEDURE SafeTransferFunds  (
+    p_sender_id   IN NUMBER,
+    p_receiver_id IN NUMBER,
+    p_amount      IN NUMBER
+) AS
+    ex_insufficient_funds EXCEPTION;
+    sender_balance NUMBER;
+BEGIN
+    -- Fetch current balance of sender
+    SELECT Balance INTO sender_balance
+    FROM Accounts
+    WHERE AccountID = p_sender_id;
+
+    -- Check if balance is sufficient
+    IF sender_balance < p_amount THEN
+        RAISE ex_insufficient_funds;
+    END IF;
+
+    -- Deduct amount from sender's account
+    UPDATE Accounts
+    SET Balance = Balance - p_amount,
+        LastModified = SYSDATE
+    WHERE AccountID = p_sender_id;
+
+    -- Credit amount to receiver's account
+    UPDATE Accounts
+    SET Balance = Balance + p_amount,
+        LastModified = SYSDATE
+    WHERE AccountID = p_receiver_id;
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE('₹' || p_amount || ' transferred successfully from Account ' || p_sender_id || ' to Account ' || p_receiver_id);
+
+EXCEPTION
+    WHEN ex_insufficient_funds THEN
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE('Transfer failed: Account ' || p_sender_id || ' has insufficient funds.');
+
+    WHEN OTHERS THEN
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE('Unexpected error occurred: ' || SQLERRM);
+END;
+/
+SET SERVEROUTPUT ON;
+
+BEGIN
+    SafeTransferFunds(1, 2, 2250); 
+    SafeTransferFunds(1, 2, 250); 
+
+END;
+/
+
+-- Scenario 2
+
+-- Procedure to update salary with proper exception handling
+CREATE OR REPLACE PROCEDURE UpdateSalary (
+    p_emp_id     IN NUMBER,
+    p_increment  IN NUMBER
+) AS
+    v_old_salary   NUMBER;
+    v_new_salary   NUMBER;
+BEGIN
+    -- Fetch current salary
+    SELECT Salary INTO v_old_salary
+    FROM Employees
+    WHERE EmployeeID = p_emp_id;
+
+    -- Calculate new salary
+    v_new_salary := v_old_salary + (v_old_salary * p_increment / 100);
+
+    -- Apply update
+    UPDATE Employees
+    SET Salary = v_new_salary
+    WHERE EmployeeID = p_emp_id;
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE(' Salary updated for Employee ID ' || p_emp_id ||
+                         '. New Salary: Rs ' || v_new_salary);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE(' Error: No employee found with ID ' || p_emp_id);
+    WHEN OTHERS THEN
+        ROLLBACK;
+        DBMS_OUTPUT.PUT_LINE(' Unexpected issue: ' || SQLERRM);
+END;
+/
+
+SET SERVEROUTPUT ON;
+
+BEGIN
+    UpdateSalary(2, 10);  
+    UpdateSalary(3, 10);
+END;
+/
+
+-- Scenario 3
+
+-- Procedure to add a new customer with exception handling for duplicates
+CREATE OR REPLACE PROCEDURE AddNewCustomer (
+    c_id     IN NUMBER,
+    c_name   IN VARCHAR2,
+    c_dob    IN DATE,
+    c_balance IN NUMBER
+) AS
+    ex_duplicate_customer EXCEPTION;
+    PRAGMA EXCEPTION_INIT(ex_duplicate_customer, -1);  -- ORA-00001 for unique constraint violation
+BEGIN
+    INSERT INTO Customers (CustomerID, Name, DOB, Balance, LastModified)
+    VALUES (c_id, c_name, c_dob, c_balance, SYSDATE);
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE(' New customer "' || c_name || '" (ID: ' || c_id || ') added successfully.');
+
+EXCEPTION
+    WHEN ex_duplicate_customer THEN
+        DBMS_OUTPUT.PUT_LINE(' Customer with ID ' || c_id || ' already exists. Cannot insert duplicate.');
+        ROLLBACK;
+
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE(' Unexpected error occurred: ' || SQLERRM);
+        ROLLBACK;
+END;
+/
+
+SET SERVEROUTPUT ON;
+
+-- Adding a new customer (should succeed)
+BEGIN
+    AddNewCustomer(15, 'Hridhwesh Maity', TO_DATE('2003-11-14', 'YYYY-MM-DD'), 6000);
+END;
+/
+
+-- Attempting to add a duplicate customer (should trigger exception)
+BEGIN
+    AddNewCustomer(1, 'Rakesh Verma', TO_DATE('1991-02-05', 'YYYY-MM-DD'), 3000);
+END;
+/
+
+select * from customers;

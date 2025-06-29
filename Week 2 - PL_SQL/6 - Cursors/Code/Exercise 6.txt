@@ -1,0 +1,41 @@
+-- Scenario 1
+
+SET SERVEROUTPUT ON;
+
+DECLARE
+    CURSOR GenerateMonthlyStatements IS
+        SELECT c.CustomerID, c.Name, t.TransactionDate, t.Amount, t.TransactionType
+        FROM Customers c
+        JOIN Accounts a ON c.CustomerID = a.CustomerID
+        JOIN Transactions t ON a.AccountID = t.AccountID
+        WHERE TRUNC(t.TransactionDate, 'MM') = TRUNC(SYSDATE, 'MM') -- Current month only
+        ORDER BY c.CustomerID, t.TransactionDate;
+
+    v_customer_id    Customers.CustomerID%TYPE;
+    v_name           Customers.Name%TYPE;
+    v_date           Transactions.TransactionDate%TYPE;
+    v_amount         Transactions.Amount%TYPE;
+    v_type           Transactions.TransactionType%TYPE;
+
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('---- Monthly Transaction Statements ----');
+
+    OPEN GenerateMonthlyStatements;
+    LOOP
+        FETCH GenerateMonthlyStatements INTO v_customer_id, v_name, v_date, v_amount, v_type;
+        EXIT WHEN GenerateMonthlyStatements%NOTFOUND;
+
+        DBMS_OUTPUT.PUT_LINE('Customer ID: ' || v_customer_id || 
+                             ', Name: ' || v_name || 
+                             ', Date: ' || TO_CHAR(v_date, 'DD-MON-YYYY') || 
+                             ', Type: ' || v_type || 
+                             ', Amount: ' || v_amount);
+    END LOOP;
+    CLOSE GenerateMonthlyStatements;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error generating monthly statements: ' || SQLERRM);
+END;
+/
+
