@@ -12,6 +12,7 @@ This repository contains my hands-on solutions for the **Digital Nurture 4.0 –
 - **Module 4 - Test driven development and Logging framework**
 - **Module 5 - Spring Core and Maven**
 - **Module 6 - Spring Data JPA with Spring Boot, Hibernate**
+- **Module 7 - Spring REST using Spring Boot 3**
 
 ---
 
