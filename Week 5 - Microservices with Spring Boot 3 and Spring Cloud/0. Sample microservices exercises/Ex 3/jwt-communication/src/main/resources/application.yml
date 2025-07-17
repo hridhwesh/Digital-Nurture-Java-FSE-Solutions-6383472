@@ -1,0 +1,5 @@
+spring:
+ security:
+  jwt:
+   secret: mySuperSecretKeyThatIsVeryLongAndSafe123456789
+   expiration: 3600000
