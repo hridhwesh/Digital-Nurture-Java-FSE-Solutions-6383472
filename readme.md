@@ -14,6 +14,7 @@ This repository contains my hands-on solutions for the **Digital Nurture 4.0 –
 - **Module 6 - Spring Data JPA with Spring Boot, Hibernate**
 - **Module 7 - Spring REST using Spring Boot 3**
 - **Module 8 - Microservices with Spring Boot 3 and Spring Cloud**
+- **Module 10 - Single Page Application framework - React**
 
 ---
 
