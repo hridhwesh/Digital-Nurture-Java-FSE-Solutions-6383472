@@ -1,0 +1,11 @@
+.mydiv {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding-right: 550px;
+	padding-left: 550px;
+	color: green;
+}
+h1 {
+	text-align: center;
+}

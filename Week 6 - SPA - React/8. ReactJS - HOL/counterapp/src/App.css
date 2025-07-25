@@ -1,0 +1,13 @@
+.main-div {
+	display: flex;
+	justify-content: center;
+	gap: 200px;
+	padding-top: 200px;
+}
+button {
+	background-color: chartreuse;
+}
+
+button:hover {
+	background-color: rgb(18, 194, 18);
+}
